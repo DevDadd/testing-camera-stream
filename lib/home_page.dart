@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:streampose/pose_cubit.dart';
+import 'package:streampose/pose_painter.dart';
 import 'package:streampose/pose_state.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +22,22 @@ class _HomePageState extends State<HomePage> {
           final controller = cubit.cameraController;
 
           if (controller != null && controller.value.isInitialized) {
-            return CameraPreview(controller);
+            final previewSize = controller.value.previewSize;
+            final imageSize = previewSize ?? const Size(0, 0);
+
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                CameraPreview(controller),
+                if (state.poses != null && imageSize.width > 0)
+                  CustomPaint(
+                    painter: PosePainter(
+                      poses: state.poses!,
+                      imageSize: imageSize,
+                    ),
+                  ),
+              ],
+            );
           }
 
           return Center(

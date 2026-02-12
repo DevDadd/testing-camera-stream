@@ -41,7 +41,7 @@ class PoseCubit extends Cubit<PoseState> {
 
     _cameraController = CameraController(
       cam,
-      ResolutionPreset.medium,
+      ResolutionPreset.high,
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.yuv420,
     );

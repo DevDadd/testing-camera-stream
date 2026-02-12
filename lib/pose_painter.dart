@@ -7,6 +7,7 @@ class PosePainter extends CustomPainter {
   PosePainter({
     required this.poses,
     required this.imageSize,
+    this.offset = Offset.zero,
     this.pointColor = Colors.greenAccent,
     this.lineColor = Colors.redAccent,
     this.pointRadius = 4.0,
@@ -15,6 +16,7 @@ class PosePainter extends CustomPainter {
 
   final List<Pose> poses;
   final Size imageSize;
+  final Offset offset;
   final Color pointColor;
   final Color lineColor;
   final double pointRadius;
@@ -71,7 +73,8 @@ class PosePainter extends CustomPainter {
         final Offset p = Offset(
           landmark.x * scaleX,
           landmark.y * scaleY,
-        );
+        ) +
+            offset;
         canvas.drawCircle(p, pointRadius, pointPaint);
       }
 
@@ -81,8 +84,9 @@ class PosePainter extends CustomPainter {
         final end = landmarks[endType];
         if (start == null || end == null) continue;
 
-        final Offset p1 = Offset(start.x * scaleX, start.y * scaleY);
-        final Offset p2 = Offset(end.x * scaleX, end.y * scaleY);
+        final Offset p1 =
+            Offset(start.x * scaleX, start.y * scaleY) + offset;
+        final Offset p2 = Offset(end.x * scaleX, end.y * scaleY) + offset;
         canvas.drawLine(p1, p2, linePaint);
       }
     }

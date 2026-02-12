@@ -36,7 +36,7 @@ class PoseCubit extends Cubit<PoseState> {
 
     final cameras = await availableCameras();
     final cam = cameras.firstWhere(
-      (c) => c.lensDirection == CameraLensDirection.back,
+      (c) => c.lensDirection == CameraLensDirection.front,
     );
 
     _cameraController = CameraController(

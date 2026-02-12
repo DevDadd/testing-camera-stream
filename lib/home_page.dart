@@ -34,6 +34,8 @@ class _HomePageState extends State<HomePage> {
                     painter: PosePainter(
                       poses: state.poses!,
                       imageSize: imageSize,
+                      // Dịch skeleton lên trên một chút (âm là đi lên).
+                      offset: const Offset(0, -20),
                     ),
                   ),
               ],

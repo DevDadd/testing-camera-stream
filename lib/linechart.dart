@@ -27,10 +27,9 @@ class LineChartDemo extends StatelessWidget {
         const epsilon = 1e-6;
 
         final min = axis.visibleRange!.minimum;
-        final max = axis.visibleRange!.maximum;
 
         final hasZeroTick =
-            ((0 - min) / axis.visibleInterval).abs() % 1 < epsilon;;
+            ((0 - min) / axis.visibleInterval).abs() % 1 < epsilon;
 
         final firstTick = min;
 
